@@ -12,4 +12,3 @@ class Chunk:
     text: str
     source: str
     chunk_id: str
-

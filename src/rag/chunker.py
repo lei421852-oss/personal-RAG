@@ -1,9 +1,10 @@
 from rag.document import Chunk, Document
 
+
 def chunk_document(
-        document: Document,
-        chunk_size: int = 500,
-        chunk_overlap: int = 100,
+    document: Document,
+    chunk_size: int = 500,
+    chunk_overlap: int = 100,
 ) -> list[Chunk]:
     chunks = []
 
@@ -15,11 +16,7 @@ def chunk_document(
 
     current_text = ""
     for paragraph in paragraphs:
-        candidate = (
-            paragraph
-            if not current_text
-            else current_text +"\n\n" + paragraph
-        )
+        candidate = paragraph if not current_text else current_text + "\n\n" + paragraph
         if len(candidate) <= chunk_size:
             current_text = candidate
             continue
@@ -29,7 +26,7 @@ def chunk_document(
                 Chunk(
                     text=current_text,
                     source=document.source,
-                    chunk_id=f"{document.source}-{len(chunks)}"
+                    chunk_id=f"{document.source}-{len(chunks)}",
                 )
             )
 
@@ -38,13 +35,13 @@ def chunk_document(
         else:
             step = chunk_size - chunk_overlap
 
-            for start in range(0,len(paragraph),step):
-                text = paragraph[start:start + chunk_size]
+            for start in range(0, len(paragraph), step):
+                text = paragraph[start : start + chunk_size]
                 chunks.append(
                     Chunk(
                         text=text,
                         source=document.source,
-                        chunk_id=f"{document.source}-{len(chunks)}"
+                        chunk_id=f"{document.source}-{len(chunks)}",
                     )
                 )
 
@@ -55,7 +52,7 @@ def chunk_document(
             Chunk(
                 text=current_text,
                 source=document.source,
-                chunk_id=f"{document.source}-{len(chunks)}"
+                chunk_id=f"{document.source}-{len(chunks)}",
             )
         )
     return chunks

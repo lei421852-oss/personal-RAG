@@ -312,7 +312,7 @@ Construct Runtime
 使用：
 
 ```python
-map_location="cpu"
+map_location = "cpu"
 ```
 
 先将 checkpoint 恢复到 CPU，再根据服务运行环境选择最终 device，使 artifact 不绑定训练时的特定 GPU，也为 Docker CPU inference 提供基础。

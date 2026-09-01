@@ -10,7 +10,7 @@ for document in documents:
     for chunk in chunks[:3]:
         print(chunk.chunk_id)
         print(chunk.text[:100])
-        print('='*30)
+        print("=" * 30)
     print(len(document.text))
     print(document.text[:100])
-    print("-"*100)
+    print("-" * 100)

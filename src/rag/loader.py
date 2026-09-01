@@ -2,6 +2,7 @@ from pathlib import Path
 
 from rag.document import Document
 
+
 def load_markdown_documents(data_dir) -> list[Document]:
     documents = []
 

@@ -1,15 +1,12 @@
 from rag.retriever import RetrievedChunk
 
-def build_rag_prompt(
-    question: str,
-    chunks: list[RetrievedChunk]
-) -> str:
+
+def build_rag_prompt(question: str, chunks: list[RetrievedChunk]) -> str:
     context_parts = []
 
-    for index,result in enumerate(chunks,start=1):
+    for index, result in enumerate(chunks, start=1):
         context_parts.append(
-            f"[{index}]source:{result.chunk.source}\n"
-            f"{result.chunk.text}"
+            f"[{index}]source:{result.chunk.source}\n{result.chunk.text}"
         )
 
     context = "\n\n".join(context_parts)

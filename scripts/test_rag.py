@@ -5,7 +5,7 @@ from rag.chunker import chunk_document
 from rag.embedding import QwenEmbeddingModel
 from rag.llm import DeepSeekLLMClient
 from rag.loader import load_markdown_documents
-from rag.prompt import build_rag_prompt 
+from rag.prompt import build_rag_prompt
 from rag.retriever import Retriever
 
 documents = load_markdown_documents("data/raw")
@@ -23,10 +23,7 @@ for document in documents:
 
 embedding_model = QwenEmbeddingModel()
 
-retriever = Retriever(
-    chunks=chunks,
-    embedding_model=embedding_model
-)
+retriever = Retriever(chunks=chunks, embedding_model=embedding_model)
 
 llm = DeepSeekLLMClient(api_key=os.environ["DEEPSEEK_API_KEY"])
 
@@ -49,8 +46,4 @@ print(answer)
 
 print("\nSources:")
 for result in results:
-    print(
-        result.chunk.source,
-        result.chunk.chunk_id,
-        result.score
-    )
+    print(result.chunk.source, result.chunk.chunk_id, result.score)
