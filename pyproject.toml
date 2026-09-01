@@ -10,7 +10,9 @@ requires-python = ">=3.12"
 dependencies = [
     "torch",
     "transformers",
-    "openai"
+    "openai",
+    "fastapi",
+    "uvicorn",
 ]
 
 [project.optional-dependencies]
