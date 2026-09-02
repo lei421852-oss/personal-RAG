@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Mini GPT 为什么使用 FastAPI lifespan？",
+    "expected_source": "2026-08-30-mini-gpt-service-RAG项目过渡交接.md",
+    "expected_text": "startup 加载一次并复用"
+  },
+  {
+    "question": "Mini GPT 的架构有哪些层？",
+    "expected_source": "2026-08-30-mini-gpt-service-项目复盘.md",
+    "expected_text": "API Layer"
+  },
+  {
+    "question":"一个训练完成的模型，如何从 checkpoint 转变为能够被外部调用、测试和部署的软件服务？",
+    "expected_source":"2026-08-30-mini-gpt-service-项目复盘.md",
+    "expected_text":"模型部署不是把整个训练项目搬到服务器，而是让推理工程消费结构明确、可移植的模型产物。"
+  },
+  {
+    "question":"Runtime和GenerationService主要复制什么问题",
+    "expected_source":"2026-08-30-mini-gpt-service-项目复盘.md",
+    "expected_text":"Runtime 解决“模型怎样运行”，`GenerationService` 则表达应用提供的“文本生成”业务能力。"
+  },
+  {
+    "question":"RAG和mini-gpt的关联",
+    "expected_source":"2026-08-30-mini-gpt-service-RAG项目过渡交接.md",
+    "expected_text":"RAG 不是推翻原有架构，而是在 Service 内部和 Runtime 以下增加更复杂的 AI pipeline。"
+  }
+]
