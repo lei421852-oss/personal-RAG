@@ -4,30 +4,21 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from rag.chunker import chunk_document
 from rag.embedding import QwenEmbeddingModel
 from rag.llm import DeepSeekLLMClient
-from rag.loader import load_markdown_documents
 from rag.retriever import Retriever
 from rag.service import RAGService
+from rag.vector_store import ChromaVectorStore
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    documents = load_markdown_documents("data/raw")
-
-    chunks = []
-    for document in documents:
-        chunks.extend(
-            chunk_document(
-                document=document,
-                chunk_size=500,
-                chunk_overlap=100,
-            )
-        )
-
+    vector_store = ChromaVectorStore()
     embedding_model = QwenEmbeddingModel()
-    retriever = Retriever(chunks=chunks, embedding_model=embedding_model)
+    retriever = Retriever(
+        embedding_model=embedding_model,
+        vector_store=vector_store,
+    )
     llm = DeepSeekLLMClient(api_key=os.environ["DEEPSEEK_API_KEY"])
 
     app.state.rag_service = RAGService(retriver=retriever, llm=llm)

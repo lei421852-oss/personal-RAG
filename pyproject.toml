@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "A personal RAG system for learning and project practice"
 requires-python = ">=3.12"
 dependencies = [
+    "chromadb",
     "torch",
     "transformers",
     "openai",

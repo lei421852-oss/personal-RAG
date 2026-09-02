@@ -1,9 +1,11 @@
 from dataclasses import dataclass
-
-import numpy as np
+from typing import TYPE_CHECKING
 
 from rag.document import Chunk
 from rag.embedding import EmbeddingModel
+
+if TYPE_CHECKING:
+    from rag.vector_store import ChromaVectorStore
 
 
 @dataclass
@@ -13,26 +15,22 @@ class RetrievedChunk:
 
 
 class Retriever:
-    def __init__(self, chunks: list[Chunk], embedding_model: EmbeddingModel):
-        self.chunks = chunks
+    def __init__(
+        self,
+        embedding_model: EmbeddingModel,
+        vector_store: "ChromaVectorStore",
+    ):
         self.embedding_model = embedding_model
-
-        texts = [chunk.text for chunk in chunks]
-
-        self.embeddings = np.array(embedding_model.embed_documents(texts))
+        self.vector_store = vector_store
 
     def search(
         self,
         query: str,
         top_k: int = 3,
     ) -> list[RetrievedChunk]:
-        query_embedding = np.array(self.embedding_model.embed_query(query=query))
+        query_embedding = self.embedding_model.embed_query(query=query)
 
-        scores = self.embeddings @ query_embedding
-
-        top_indices = np.argsort(scores)[::-1][:top_k]
-
-        return [
-            RetrievedChunk(chunk=self.chunks[index], score=float(scores[index]))
-            for index in top_indices
-        ]
+        return self.vector_store.search(
+            query_embedding=query_embedding,
+            top_k=top_k,
+        )
