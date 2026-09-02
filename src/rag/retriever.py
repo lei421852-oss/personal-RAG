@@ -11,7 +11,8 @@ if TYPE_CHECKING:
 @dataclass
 class RetrievedChunk:
     chunk: Chunk
-    score: float
+    retrieval_score: float
+    rerank_score: float | None = None
 
 
 class Retriever:

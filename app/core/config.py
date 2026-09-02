@@ -38,11 +38,20 @@ class Settings(BaseSettings):
         ge=0,
         validation_alias="RAG_CHUNK_OVERLAP",
     )
-    default_top_k: int = Field(
+    retrieval_top_k: int = Field(
+        default=10,
+        gt=0,
+        validation_alias="RAG_RETRIEVAL_TOP_K",
+    )
+    rerank_top_k: int = Field(
         default=3,
         gt=0,
         le=10,
-        validation_alias="RAG_DEFAULT_TOP_K",
+        validation_alias="RAG_RERANK_TOP_K",
+    )
+    reranker_model_name: str = Field(
+        default="BAAI/bge-reranker-base",
+        validation_alias="RAG_RERANKER_MODEL_NAME",
     )
     deepseek_api_key: str | None = Field(
         default=None,

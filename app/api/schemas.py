@@ -9,7 +9,8 @@ class QueryRequest(BaseModel):
 class SourceResponse(BaseModel):
     source: str
     chunk_id: str
-    score: float
+    retrieval_score: float
+    rerank_score: float | None
 
 
 class QueryResponse(BaseModel):

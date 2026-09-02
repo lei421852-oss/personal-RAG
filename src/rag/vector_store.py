@@ -3,11 +3,8 @@ from pathlib import Path
 import chromadb
 
 from rag.document import Chunk
+from rag.errors import IndexNotReadyError, RetrievalError
 from rag.retriever import RetrievedChunk
-
-
-class IndexNotReadyError(RuntimeError):
-    pass
 
 
 class ChromaVectorStore:
@@ -75,12 +72,15 @@ class ChromaVectorStore:
         query_embedding: list[float],
         top_k: int,
     ) -> list[RetrievedChunk]:
-        result_count = min(top_k, self.collection.count())
-        results = self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=result_count,
-            include=["documents", "metadatas", "distances"],
-        )
+        try:
+            result_count = min(top_k, self.collection.count())
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=result_count,
+                include=["documents", "metadatas", "distances"],
+            )
+        except Exception as exc:
+            raise RetrievalError("Vector search failed") from exc
 
         documents = results["documents"][0]
         metadatas = results["metadatas"][0]
@@ -104,7 +104,7 @@ class ChromaVectorStore:
             retrieved_chunks.append(
                 RetrievedChunk(
                     chunk=chunk,
-                    score=1.0 - float(distance),
+                    retrieval_score=1.0 - float(distance),
                 )
             )
 

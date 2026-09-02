@@ -12,6 +12,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from app.core.config import get_settings
 from rag.embedding import QwenEmbeddingModel
 from rag.llm import DeepSeekLLMClient
+from rag.reranker import BGEReranker
 from rag.retriever import Retriever
 from rag.service import RAGService
 from rag.vector_store import ChromaVectorStore
@@ -30,18 +31,20 @@ vector_store = ChromaVectorStore(
 )
 
 retriever = Retriever(embedding_model=embedding_model, vector_store=vector_store)
+reranker = BGEReranker(model_name=settings.reranker_model_name)
 
 llm = DeepSeekLLMClient(
     api_key=settings.require_deepseek_api_key(),
     model=settings.deepseek_model,
 )
 
-rag = RAGService(retriver=retriever, llm=llm)
+rag = RAGService(retriver=retriever, reranker=reranker, llm=llm)
 
 for index, case in enumerate(cases, start=1):
     result = rag.answer(
         case["question"],
-        top_k=settings.default_top_k,
+        retrieval_top_k=settings.retrieval_top_k,
+        rerank_top_k=settings.rerank_top_k,
     )
 
     print("\n" + "=" * 60)
@@ -63,5 +66,6 @@ for index, case in enumerate(cases, start=1):
             f"[{i}] ",
             source.source,
             source.chunk_id,
-            source.score,
+            source.retrieval_score,
+            source.rerank_score,
         )
