@@ -1,0 +1,27 @@
+[
+  {
+    "question": "Mini GPT 为什么使用 FastAPI lifespan？",
+    "expected_answer":"因为 GPT 模型属于昂贵的 application-level resource，需要在应用启动时加载一次并在后续请求中复用。"
+  },
+  {
+    "question": "Mini GPT 的架构有哪些层？",
+    "expected_answer":""
+  },
+  {
+    "question":"一个训练完成的模型，如何从 checkpoint 转变为能够被外部调用、测试和部署的软件服务？",
+    "expected_answer":""
+  },
+  {
+    "question":"Runtime和GenerationService主要复制什么问题",
+    "expected_answer":""
+
+  },
+  {
+    "question":"RAG和mini-gpt的关联",
+    "expected_answer":""
+  },
+  {
+    "question": "Mini GPT 项目最终部署在哪家云厂商？",
+    "expected_answer": null
+  }
+]
