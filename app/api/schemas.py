@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 class QueryRequest(BaseModel):
     question: str
-    top_k: int = Field(default=3, gt=0, le=10)
+    top_k: int | None = Field(default=None, gt=0, le=10)
 
 
 class SourceResponse(BaseModel):

@@ -13,8 +13,8 @@ class IndexNotReadyError(RuntimeError):
 class ChromaVectorStore:
     def __init__(
         self,
-        persist_directory: str | Path = "data/chroma",
-        collection_name: str = "personal-rag",
+        persist_directory: str | Path,
+        collection_name: str,
         *,
         rebuild: bool = False,
     ):
@@ -66,8 +66,7 @@ class ChromaVectorStore:
             embeddings=embeddings,
             documents=[chunk.text for chunk in chunks],
             metadatas=[
-                {"source": chunk.source, "chunk_id": chunk.chunk_id}
-                for chunk in chunks
+                {"source": chunk.source, "chunk_id": chunk.chunk_id} for chunk in chunks
             ],
         )
 

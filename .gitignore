@@ -18,6 +18,7 @@ dist/
 .vscode/
 .env
 .env.*
+!.env.example
 
 # Hugging Face and model caches
 .cache/
