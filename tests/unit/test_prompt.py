@@ -33,4 +33,11 @@ def test_prompt_contains_question_context_sources_and_guardrail() -> None:
     assert "Requests reuse the initialized resources" in prompt
     assert "architecture.md" in prompt
     assert "runtime.md" in prompt
+    assert "[1] Source: architecture.md" in prompt
+    assert "Chunk: architecture.md-0" in prompt
+    assert "only information explicitly supported" in prompt
+    assert "Do not use your own knowledge" in prompt
+    assert "supports only part of the answer" in prompt
     assert "knowledge base does not contain enough information" in prompt
+    assert "such as [1] or [2]" in prompt
+    assert "Do not cite a context number that does not exist" in prompt

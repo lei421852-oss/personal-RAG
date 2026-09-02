@@ -54,7 +54,13 @@ for index, case in enumerate(cases, start=1):
     print("\nQuestion:")
     print(case["question"])
 
-    print("\nExpected:")
+    print("\nCategory:")
+    print(case.get("category", "unspecified"))
+
+    print("\nExpected behavior:")
+    print(case.get("expected_behavior"))
+
+    print("\nExpected answer notes:")
     print(case.get("expected_answer"))
 
     print("\nActual:")
@@ -69,3 +75,9 @@ for index, case in enumerate(cases, start=1):
             source.retrieval_score,
             source.rerank_score,
         )
+
+    print("\nManual Review:")
+    print("[ ] Correctness")
+    print("[ ] Groundedness")
+    print("[ ] Citation quality")
+    print("[ ] Insufficient-context behavior")

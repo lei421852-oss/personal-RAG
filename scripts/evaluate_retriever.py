@@ -117,13 +117,17 @@ def main() -> None:
 
         print("  RERANK MISS")
         for final_rank, result in enumerate(comparison["reranked"], start=1):
+            heading = result.chunk.text.split("\n\n", maxsplit=1)[0]
+            preview = result.chunk.text.replace("\n", " ")[:160]
             print(
                 "  ",
                 f"final_rank={final_rank}",
                 f"source={result.chunk.source}",
                 f"chunk_id={result.chunk.chunk_id}",
+                f"heading={heading}",
                 f"retrieval_score={result.retrieval_score:.6f}",
                 f"rerank_score={result.rerank_score:.6f}",
+                f"preview={preview}",
             )
 
 

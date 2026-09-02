@@ -1,27 +1,44 @@
 [
   {
     "question": "Mini GPT 为什么使用 FastAPI lifespan？",
-    "expected_answer":"因为 GPT 模型属于昂贵的 application-level resource，需要在应用启动时加载一次并在后续请求中复用。"
+    "category": "fully_answerable",
+    "expected_behavior": "Answer the lifespan resource-management reason using only retrieved context and include a valid context citation.",
+    "expected_answer": "因为 GPT 模型属于昂贵的 application-level resource，需要在应用启动时加载一次并在后续请求中复用。"
   },
   {
     "question": "Mini GPT 的架构有哪些层？",
-    "expected_answer":""
+    "category": "fully_answerable",
+    "expected_behavior": "List only architecture layers supported by the retrieved context and cite the supporting context.",
+    "expected_answer": ""
   },
   {
-    "question":"一个训练完成的模型，如何从 checkpoint 转变为能够被外部调用、测试和部署的软件服务？",
-    "expected_answer":""
+    "question": "一个训练完成的模型，如何从 checkpoint 转变为能够被外部调用、测试和部署的软件服务？",
+    "category": "fully_answerable",
+    "expected_behavior": "Describe only the serving steps present in the retrieved context and cite their supporting context.",
+    "expected_answer": ""
   },
   {
-    "question":"Runtime和GenerationService主要复制什么问题",
-    "expected_answer":""
-
+    "question": "Runtime和GenerationService主要负责什么问题？",
+    "category": "fully_answerable",
+    "expected_behavior": "Explain only the documented responsibilities of Runtime and GenerationService with valid citations.",
+    "expected_answer": ""
   },
   {
-    "question":"RAG和mini-gpt的关联",
-    "expected_answer":""
+    "question": "RAG和mini-gpt的关联",
+    "category": "fully_answerable",
+    "expected_behavior": "Explain only relationships explicitly supported by the retrieved context and cite them.",
+    "expected_answer": ""
+  },
+  {
+    "question": "Mini GPT 为什么使用 FastAPI lifespan？它最终部署在哪家云厂商？",
+    "category": "partially_answerable",
+    "expected_behavior": "Answer the supported lifespan part with a citation, explicitly identify the cloud vendor information as missing, and do not guess a vendor.",
+    "expected_answer": "说明 lifespan 用于在启动时加载并复用昂贵资源；明确指出知识库未提供最终部署的云厂商。"
   },
   {
     "question": "Mini GPT 项目最终部署在哪家云厂商？",
+    "category": "unanswerable",
+    "expected_behavior": "State that the knowledge base does not contain enough information and do not guess a cloud vendor.",
     "expected_answer": null
   }
 ]
